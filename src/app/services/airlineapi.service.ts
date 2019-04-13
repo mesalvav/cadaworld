@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Rutafave } from '../models/rutasfave';
+import { Rutafave } from '../models/Rutasfave';
 
 @Injectable({
   providedIn: 'root'

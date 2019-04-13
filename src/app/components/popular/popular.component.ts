@@ -16,6 +16,7 @@ export class PopularComponent implements OnInit {
     this.apiservice.getPopularRoutes()
     .subscribe(data => {
       this.RutasPop = data;
+      console.log(data);
     });
   }
 
