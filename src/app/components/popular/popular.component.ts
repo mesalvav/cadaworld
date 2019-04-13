@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AirlineapiService } from '../../services/airlineapi.service';
+import { Rutafave } from '../../models/Rutasfave';
 
 @Component({
   selector: 'app-popular',
@@ -6,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./popular.component.css']
 })
 export class PopularComponent implements OnInit {
+  RutasPop: Rutafave[];
 
-  constructor() { }
+  constructor(private apiservice: AirlineapiService) { }
 
   ngOnInit() {
+    this.apiservice.getPopularRoutes()
+    .subscribe(data => {
+      this.RutasPop = data;
+    });
   }
+
 
 }
