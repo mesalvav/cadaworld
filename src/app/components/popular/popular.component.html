@@ -1,23 +1,32 @@
 <p>
     popular works!
 </p>
-<div *ngFor="let ruta of RutasPop">
+<div id="containcards" fxLayoutGap="10px">
 
-    <mat-card class="example-card">
+    <mat-card class="onecard" *ngFor="let ruta of RutasPop">
+        <mat-card-content></mat-card-content>
+        <div class="imgcontain">
+            <img class="img" mat-card-image src="{{ ruta.routeCoverImage }}" alt="Photo of a Shiba Inu">
+        </div>
+
         <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Shiba Inu</mat-card-title>
-            <mat-card-subtitle>{{ ruta.departureDate }}</mat-card-subtitle>
+
+            <!-- <div mat-card-avatar class="example-header-image"></div> -->
+            <mat-card-title>{{ruta.origin}} - {{ ruta.destination}}</mat-card-title>
+            <mat-card-subtitle>departure date: {{ ruta.departureDate }}</mat-card-subtitle>
         </mat-card-header>
-        <img mat-card-image src="{{ ruta.routeCoverImage }}" alt="Photo of a Shiba Inu">
+
         <mat-card-content>
-            <p>
-                The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
-            </p>
+
+            <div>
+                <i>fares from * </i>
+
+                <strong class="Price"> ${{ ruta.price }}</strong>
+            </div>
         </mat-card-content>
+
         <mat-card-actions>
-            <button mat-button>LIKE</button>
-            <button mat-button>SHARE</button>
+            <button mat-raised-button color="primary" (click)=filledAform(ruta)>VIEW DEAL</button>
         </mat-card-actions>
     </mat-card>
 

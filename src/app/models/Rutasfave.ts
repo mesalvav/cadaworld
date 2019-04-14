@@ -4,10 +4,10 @@ export class Rutafave {
     public origin: string,
     public fareclass: string,
     public tripType: string,
-    public departureDate: Date,
-    public returnDate: Date,
-    public routeCoverImage: string
-
+    public departureDate: String,
+    public returnDate: String,
+    public routeCoverImage: string,
+    public price?: number
 
   ) {}
 }

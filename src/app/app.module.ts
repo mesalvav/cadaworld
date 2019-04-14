@@ -7,9 +7,12 @@ import { PopularComponent } from './components/popular/popular.component';
 import { FilledformComponent } from './components/filledform/filledform.component';
 import { HttpClientModule } from '@angular/common/http';
 
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
+
 
 @NgModule({
   declarations: [
@@ -22,6 +25,7 @@ import {MatCardModule} from '@angular/material/card';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    FlexLayoutModule,
     MatButtonModule,
     MatCardModule
   ],

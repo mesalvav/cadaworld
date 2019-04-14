@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MessagingrutaService } from '../../services/messagingruta.service';
+import { Rutafave } from '../../models/Rutasfave';
 
 @Component({
   selector: 'app-filledform',
@@ -6,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./filledform.component.css']
 })
 export class FilledformComponent implements OnInit {
-
-  constructor() { }
+  RutasPop: Rutafave;
+  constructor(
+    private messagingService: MessagingrutaService
+  ) { }
 
   ngOnInit() {
+    this.RutasPop = this.messagingService.rutamesage;
+    console.log(this.RutasPop);
   }
 
 }
