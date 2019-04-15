@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MessagingrutaService } from '../../services/messagingruta.service';
 import { Rutafave } from '../../models/Rutasfave';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import { AirlineapiService } from '../../services/airlineapi.service';
 import { PostSearchObject } from '../../models/Postsearch';
+
+import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-filledform',
@@ -15,14 +17,11 @@ export class FilledformComponent implements OnInit {
   minReturnDate;
   minDepartDate;
   passengers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  tripType = 'oneWay';
 
-  NOpassengers = 1;
-  theorigin;
-  thedestination;
   departuredate;
 
   // @Output() change: EventEmitter<MatRadioChange>;
+  reactiveForm: FormGroup;
 
   constructor(
     private messagingService: MessagingrutaService,
@@ -38,28 +37,54 @@ export class FilledformComponent implements OnInit {
     this.minDepartDate = new Date();
     this.minReturnDate = new Date();
 
-    this.theorigin = this.RutasPop.origin;
-    this.thedestination = this.RutasPop.destination;
-
     this.departuredate = new Date(this.RutasPop.departureDate);
     this.minReturnDate = new Date(this.RutasPop.departureDate);
+
+    // reactive form
+    this.reactiveForm = new FormGroup({
+      'tripType': new FormControl('oneWay'),
+      'origin': new FormControl(this.RutasPop.origin, [Validators.required]),
+      'destination': new FormControl(this.RutasPop.destination, [Validators.required]),
+      'departureDate': new FormControl(this.departuredate, [Validators.required]),
+      'returnDate': new FormControl({value: null, disabled: true}),
+      'passengerCount': new FormControl(1,[Validators.required]),
+      'promoCode': new FormControl(null)
+    });
+
+  }
+
+  // when departure date changes return date should be older than departure date
+  addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
+    console.log(`${type}: ${event.value}`);
+    this.minReturnDate = new Date(event.value);
+    console.log(this.minReturnDate);
+  }
+  // when radio button change oneWay or roundTrip
+  radioChanged(event) {
+    console.log(event.value);
+    if (event.value === 'roundTrip') {
+      this.reactiveForm.get('returnDate').enable();
+    } else {
+      this.reactiveForm.get('returnDate').disable();
+    }
   }
 
   onSubmit(form: NgForm) {
-      // console.log(form.value);
+       console.log(this.reactiveForm);
 
       const postobject =
       new PostSearchObject(
-        form.value.destination,
-        form.value.origin,
-        form.value.departureDate,
-        form.value.passengerCount,
-        form.value.returnDate,
-        form.value.promoCode
+        this.reactiveForm.value.destination,
+        this.reactiveForm.value.origin,
+        this.reactiveForm.value.departureDate,
+        this.reactiveForm.value.passengerCount,
+        this.reactiveForm.value.returnDate,
+        this.reactiveForm.value.promoCode
         );
 
         this.airlineapiService.postRequest(postobject).subscribe(data =>{
           console.log(data);
+
         });
   }
 }
