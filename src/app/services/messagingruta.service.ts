@@ -9,14 +9,14 @@ export class MessagingrutaService {
 
   constructor() {
     this.rutamesage =
-      new Rutafave('', '', '', '', '', '', '');
+      new Rutafave('', '', '', '', new Date(), new Date(), '');
    }
 
-  add( rutax: Rutafave){
+  add( rutax: Rutafave) {
     this.rutamesage = rutax;
   }
   clear() {
     this.rutamesage =
-      new Rutafave('', '', '', '', '', '', '');
+      new Rutafave('', '', '', '', new Date(), new Date(), '');
   }
 }

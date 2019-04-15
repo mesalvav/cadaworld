@@ -1,3 +1,78 @@
-<p>
-  filledform works!
-</p>
+<a routerLink="/populars" class="nav-link" mat-raised-button color="accent">To populars routes</a>
+
+<section>
+    <form fxLayout="column" fxLayoutAlign="center center" #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <p>
+            <mat-radio-group aria-label="Select an option" name="typeoftrip" [(ngModel)]="triptype">
+                <mat-radio-button value="round">Round Trip</mat-radio-button>
+                <mat-radio-button value="one">One Way</mat-radio-button>
+            </mat-radio-group>
+        </p>
+        <div fxLayout.md="row">
+
+            <mat-form-field appearance="outline">
+                <mat-label>From</mat-label>
+                <input matInput placeholder="Origin" [(ngModel)]="theorigin" name="origin" required minlength="3">
+                <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+                <!-- <mat-hint>Hint</mat-hint> -->
+            </mat-form-field>
+
+
+            <mat-form-field appearance="outline">
+                <mat-label>To</mat-label>
+                <input matInput placeholder="Destination" [(ngModel)]="thedestination" name="destination" required minlength="3">
+                <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+                <!-- <mat-hint>Hint</mat-hint> -->
+            </mat-form-field>
+
+
+        </div>
+        <div fxLayout.md="row">
+
+            <mat-form-field appearance="outline">
+                <mat-label>Depart</mat-label>
+                <input matInput [matDatepicker]="departpicker" placeholder="Choose a date" [(ngModel)]="departuredate" name="departdate" required [min]="minDepartDate">
+                <mat-datepicker-toggle matSuffix [for]="departpicker"></mat-datepicker-toggle>
+                <mat-datepicker #departpicker></mat-datepicker>
+                <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+                <!-- <mat-hint>Hint</mat-hint> -->
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Return</mat-label>
+                <input matInput [matDatepicker]="returnpicker" placeholder="Choose a date" ngModel name="returndate" required [min]="minReturnDate">
+                <mat-datepicker-toggle matSuffix [for]="returnpicker"></mat-datepicker-toggle>
+                <mat-datepicker #returnpicker></mat-datepicker>
+                <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+                <!-- <mat-hint>Hint</mat-hint> -->
+            </mat-form-field>
+
+        </div>
+        <div fxLayout.md="row">
+
+            <mat-form-field appearance="outline">
+                <mat-label>Passenger(s)</mat-label>
+                <mat-select required [(ngModel)]="NOpassengers" name="passengers">
+                    <mat-option *ngFor="let passe of passengers" [value]="passe">
+                        {{ passe }} Adult(s)
+                    </mat-option>
+                </mat-select>
+                <!-- <input matInput placeholder="Passengers" ngModel name="Passengers" required> -->
+                <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+                <!-- <mat-hint>Hint</mat-hint> -->
+            </mat-form-field>
+
+
+            <mat-form-field appearance="outline">
+                <mat-label>Promo Code</mat-label>
+                <input matInput placeholder="Promo Code" name="Promocode" ngModel>
+                <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+                <!-- <mat-hint>Hint</mat-hint> -->
+            </mat-form-field>
+
+
+        </div>
+        <br>
+        <button type="submit" mat-raised-button color="accent" [disabled]="f.invalid">Search Flights</button>
+    </form>
+</section>
