@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MessagingrutaService } from '../../services/messagingruta.service';
 import { Rutafave } from '../../models/Rutasfave';
 import { NgForm } from '@angular/forms';
+import { AirlineapiService } from '../../services/airlineapi.service';
+import { PostSearchObject } from '../../models/Postsearch';
 
 @Component({
   selector: 'app-filledform',
@@ -12,16 +14,19 @@ export class FilledformComponent implements OnInit {
   RutasPop: Rutafave;
   minReturnDate;
   minDepartDate;
-  passengers = [1,2,3,4,5,6,7,8,9,10];
-  triptype = "one";
+  passengers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  tripType = 'oneWay';
 
   NOpassengers = 1;
   theorigin;
   thedestination;
   departuredate;
 
+  // @Output() change: EventEmitter<MatRadioChange>;
+
   constructor(
-    private messagingService: MessagingrutaService
+    private messagingService: MessagingrutaService,
+    private airlineapiService: AirlineapiService
   ) { }
 
   ngOnInit() {
@@ -41,6 +46,20 @@ export class FilledformComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-      console.log(form);
+      // console.log(form.value);
+
+      const postobject =
+      new PostSearchObject(
+        form.value.destination,
+        form.value.origin,
+        form.value.departureDate,
+        form.value.passengerCount,
+        form.value.returnDate,
+        form.value.promoCode
+        );
+
+        this.airlineapiService.postRequest(postobject).subscribe(data =>{
+          console.log(data);
+        });
   }
 }

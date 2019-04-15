@@ -3,9 +3,9 @@
 <section>
     <form fxLayout="column" fxLayoutAlign="center center" #f="ngForm" (ngSubmit)="onSubmit(f)">
         <p>
-            <mat-radio-group aria-label="Select an option" name="typeoftrip" [(ngModel)]="triptype">
-                <mat-radio-button value="round">Round Trip</mat-radio-button>
-                <mat-radio-button value="one">One Way</mat-radio-button>
+            <mat-radio-group aria-label="Select an option" name="tripType" [(ngModel)]="tripType">
+                <mat-radio-button value="roundTrip">Round Trip</mat-radio-button>
+                <mat-radio-button value="oneWay">One Way</mat-radio-button>
             </mat-radio-group>
         </p>
         <div fxLayout.md="row">
@@ -31,7 +31,7 @@
 
             <mat-form-field appearance="outline">
                 <mat-label>Depart</mat-label>
-                <input matInput [matDatepicker]="departpicker" placeholder="Choose a date" [(ngModel)]="departuredate" name="departdate" required [min]="minDepartDate">
+                <input matInput [matDatepicker]="departpicker" placeholder="Choose a date" [(ngModel)]="departuredate" name="departureDate" required [min]="minDepartDate">
                 <mat-datepicker-toggle matSuffix [for]="departpicker"></mat-datepicker-toggle>
                 <mat-datepicker #departpicker></mat-datepicker>
                 <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
@@ -40,7 +40,7 @@
 
             <mat-form-field appearance="outline">
                 <mat-label>Return</mat-label>
-                <input matInput [matDatepicker]="returnpicker" placeholder="Choose a date" ngModel name="returndate" required [min]="minReturnDate">
+                <input matInput [matDatepicker]="returnpicker" placeholder="Choose a date" ngModel name="returnDate" [min]="minReturnDate">
                 <mat-datepicker-toggle matSuffix [for]="returnpicker"></mat-datepicker-toggle>
                 <mat-datepicker #returnpicker></mat-datepicker>
                 <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
@@ -52,7 +52,7 @@
 
             <mat-form-field appearance="outline">
                 <mat-label>Passenger(s)</mat-label>
-                <mat-select required [(ngModel)]="NOpassengers" name="passengers">
+                <mat-select required [(ngModel)]="NOpassengers" name="passengerCount">
                     <mat-option *ngFor="let passe of passengers" [value]="passe">
                         {{ passe }} Adult(s)
                     </mat-option>
@@ -65,7 +65,7 @@
 
             <mat-form-field appearance="outline">
                 <mat-label>Promo Code</mat-label>
-                <input matInput placeholder="Promo Code" name="Promocode" ngModel>
+                <input matInput placeholder="Promo Code" name="promoCode" ngModel>
                 <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
                 <!-- <mat-hint>Hint</mat-hint> -->
             </mat-form-field>
