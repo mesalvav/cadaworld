@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Rutafave } from '../models/Rutasfave';
 import { PostSearchObject } from '../models/Postsearch';
+import { PostResultObject } from '../models/PostResults';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,6 @@ export class AirlineapiService {
 
   postRequest(postSearchObject: PostSearchObject) {
     return this.http
-    .post<any>('https://everymundointernship.herokuapp.com/search/YL20KT86BN95', postSearchObject);
+    .post<PostResultObject[]>('https://everymundointernship.herokuapp.com/search/YL20KT86BN95', postSearchObject);
   }
 }

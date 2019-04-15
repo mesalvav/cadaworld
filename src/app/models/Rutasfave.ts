@@ -2,7 +2,7 @@ export class Rutafave {
   constructor(
     public destination: string,
     public origin: string,
-    public fareclass: string,
+    public fareClass: string,
     public tripType: string,
     public departureDate: Date,
     public returnDate: Date,

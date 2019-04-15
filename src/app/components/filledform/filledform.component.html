@@ -72,6 +72,6 @@
 
         </div>
         <br>
-        <button type="submit" mat-raised-button color="accent">Search Flights</button>
+        <button type="submit" mat-raised-button color="accent" [disabled]="this.reactiveForm.invalid">Search Flights</button>
     </form>
 </section>

@@ -19,13 +19,15 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material';
 import {MatSelectModule} from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PostresultsComponent } from './components/postresults/postresults.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     PopularComponent,
-    FilledformComponent
+    FilledformComponent,
+    PostresultsComponent
   ],
   imports: [
     BrowserModule,

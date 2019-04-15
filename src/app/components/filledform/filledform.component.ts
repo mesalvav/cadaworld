@@ -4,8 +4,12 @@ import { Rutafave } from '../../models/Rutasfave';
 import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import { AirlineapiService } from '../../services/airlineapi.service';
 import { PostSearchObject } from '../../models/Postsearch';
+import { Router } from '@angular/router';
 
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
+import { PostResultObject } from '../../models/PostResults';
+import { MessagingResultsPostService } from '../../services/messaging-results-post.service';
+
 
 @Component({
   selector: 'app-filledform',
@@ -22,10 +26,12 @@ export class FilledformComponent implements OnInit {
 
   // @Output() change: EventEmitter<MatRadioChange>;
   reactiveForm: FormGroup;
-
+  postResultsObjects: PostResultObject[];
   constructor(
     private messagingService: MessagingrutaService,
-    private airlineapiService: AirlineapiService
+    private airlineapiService: AirlineapiService,
+    private messagingResultsPostService: MessagingResultsPostService,
+    private routing: Router
   ) { }
 
   ngOnInit() {
@@ -46,7 +52,7 @@ export class FilledformComponent implements OnInit {
       'origin': new FormControl(this.RutasPop.origin, [Validators.required]),
       'destination': new FormControl(this.RutasPop.destination, [Validators.required]),
       'departureDate': new FormControl(this.departuredate, [Validators.required]),
-      'returnDate': new FormControl({value: null, disabled: true}),
+      'returnDate': new FormControl({value: null, disabled: true}, [Validators.required]),
       'passengerCount': new FormControl(1,[Validators.required]),
       'promoCode': new FormControl(null)
     });
@@ -82,9 +88,14 @@ export class FilledformComponent implements OnInit {
         this.reactiveForm.value.promoCode
         );
 
-        this.airlineapiService.postRequest(postobject).subscribe(data =>{
-          console.log(data);
-
+        this.airlineapiService
+        .postRequest(postobject)
+        .subscribe((resulted) => {
+          // console.log(resulted);
+            this.postResultsObjects = resulted;
+            // console.log(this.postResultsObjects);
+            this.messagingResultsPostService.add(this.postResultsObjects);
+            this.routing.navigate(['postresults']);
         });
   }
 }
