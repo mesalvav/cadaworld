@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { PostResultObject, FlattenPostResultObject } from '../models/PostResults';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { DatePipe } from '@angular/common';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,23 @@ export class MessagingResultsPostService {
    clear() {
      this.postResult = [];
    }
+
+   getFilteredObservable():  Observable<FlattenPostResultObject[]> {
+      const filteredObservable$$$: Observable<FlattenPostResultObject[]>
+      = this.flatResults$$$.pipe(
+        map(flatObjS => flatObjS
+                .filter( objX => this.toNumericalTime(objX.departureTime) > this.toNumericalTime('11:00') )
+
+      ) );
+
+      return filteredObservable$$$;
+   }
+  private toNumericalTime(time: string) {
+
+    const timex = time.split(':').join('');
+    return Number(timex);
+  }
+
 
     // flatten mean for each route create a row (similar to DB denormalization)
    private resultsFlattener() {

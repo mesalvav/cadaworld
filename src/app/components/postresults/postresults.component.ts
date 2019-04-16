@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MessagingResultsPostService } from '../../services/messaging-results-post.service';
-import { PostResultObject, FlattenPostResultObject, RoutesObject } from '../../models/PostResults';
+import { FlattenPostResultObject } from '../../models/PostResults';
 
-import { DatePipe } from '@angular/common';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -22,7 +21,8 @@ export class PostresultsComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.flatDataSource$$$ = this.messagingResultsPostService.flatResults$$$;
+    this.flatDataSource$$$
+      = this.messagingResultsPostService.getFilteredObservable();
 
   }
   // flatten mean for each route create a row (similar to DB denormalization)
