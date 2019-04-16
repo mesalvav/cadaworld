@@ -3,11 +3,11 @@ export class PostResultObject {
     public destination: string,
     public origin: string,
     public tripType: string,
-    public departureDate: Date,
+    public departureDate: string,
     public fareClass: string,
     public routes: RoutesObject[],
 
-    public returnDate?: Date,
+    public returnDate?: string
 
   ) {}
 }
@@ -16,6 +16,29 @@ export class RoutesObject {
   constructor(
     public departureTime: string,
     public arrivalTime: string,
-    public priceUSD
+    public priceUSD: number
   ) {}
 }
+
+
+
+export class FlattenPostResultObject {
+
+  constructor(
+    public destination: string,
+    public origin: string,
+    public tripType: string,
+
+    public fareClass: string,
+    public departureDate?: string,
+    public returnDate?: string,
+
+    public routes?: RoutesObject[],
+    public departureTime?: string,
+    public arrivalTime?: string,
+    public priceUSD?: number
+
+  ) {}
+}
+
+
