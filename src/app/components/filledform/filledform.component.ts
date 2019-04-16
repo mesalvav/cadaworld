@@ -76,7 +76,7 @@ export class FilledformComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-       console.log(this.reactiveForm);
+       // console.log(this.reactiveForm);
 
       const postobject =
       new PostSearchObject(
