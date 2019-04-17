@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MessagingResultsPostService } from '../../services/messaging-results-post.service';
 import { FlattenPostResultObject } from '../../models/PostResults';
 
 import { Observable } from 'rxjs';
+import {MatDialog, MatDialogConfig} from '@angular/material';
+import { FilterdialogComponent } from '../filterdialog/filterdialog.component';
+
 
 @Component({
   selector: 'app-postresults',
@@ -16,17 +19,26 @@ export class PostresultsComponent implements OnInit {
 
   flatDataSource$$$: Observable<FlattenPostResultObject[]>;
 
+
   constructor(
     private messagingResultsPostService: MessagingResultsPostService,
+    public dialog: MatDialog
+
     ) { }
 
   ngOnInit() {
+    // flatten mean for each route create a row (similar to DB denormalization)
     this.flatDataSource$$$
       = this.messagingResultsPostService.getFilteredObservable();
 
   }
-  // flatten mean for each route create a row (similar to DB denormalization)
 
+  openFilterDialog() {
+
+    const dialogConfig = new MatDialogConfig();
+
+    this.dialog.open(FilterdialogComponent, dialogConfig);
+   }
 
 
 }

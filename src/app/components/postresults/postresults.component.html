@@ -1,6 +1,8 @@
 <a routerLink="/populars" class="nav-link" mat-raised-button color="accent">To populars routes</a>
-<br>
-<br>
+<div fxLayout="row" fxLayoutAlign="center" class="filterButton">
+    <button mat-raised-button color="warn" (click)="openFilterDialog()">Open Filter</button>
+</div>
+
 <div fxLayout="row" fxLayoutAlign="center center">
     <table mat-table [dataSource]="flatDataSource$$$ | async" class="mat-elevation-z8">
 

@@ -1,0 +1,76 @@
+<mat-dialog-content>
+    <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+        <h4>Departure Time less than</h4>
+        <mat-form-field>
+            <mat-label>hour(s)</mat-label>
+            <mat-select name="departureHourLessThan" formControlName="departureHourLessThan">
+                <mat-option [value]="null">None</mat-option>
+                <mat-option *ngFor="let hour of lessThanHours" [value]="hour">
+                    {{ hour }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div style="display: inline; font-size: 2em">&nbsp; : &nbsp; </div>
+        <mat-form-field>
+            <mat-label>minutes(s)</mat-label>
+            <mat-select name="departureMinuteLessThan" formControlName="departureMinuteLessThan">
+                <mat-option *ngFor="let minute of HrMinutes" [value]="minute">
+                    {{ minute }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <h4>Departure time higher than</h4>
+        <mat-form-field>
+            <mat-label>hour(s)</mat-label>
+            <mat-select name="departureHourMoreThan" formControlName="departureHourMoreThan">
+                <mat-option [value]="null">None</mat-option>
+                <mat-option *ngFor="let hour of higherThanHours" [value]="hour">
+                    {{ hour }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div style="display: inline; font-size: 2em">&nbsp; : &nbsp; </div>
+        <mat-form-field>
+            <mat-label>minute(s)</mat-label>
+            <mat-select name="departureMinuteMoreThan" formControlName="departureMinuteMoreThan">
+                <mat-option *ngFor="let minute of HrMinutes" [value]="minute">
+                    {{ minute }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <!-- price -->
+
+
+        <div fxLayout.gt-sm="row">
+            <div fxLayout="column">
+                <h4>Price less than</h4>
+                <mat-form-field>
+                    <mat-label>$USD</mat-label>
+                    <mat-select>
+                        <mat-option>
+                            0
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div style="display: inline; font-size: 2em">&nbsp; &nbsp; </div>
+            <div fxLayout="column">
+                <h4>Price higher than</h4>
+                <mat-form-field>
+                    <mat-label>$USD</mat-label>
+                    <mat-select>
+                        <mat-option>
+                            1
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div mat-dialog-actions>
+            <button mat-button [mat-dialog-close] color="accent">Close</button>
+            <button mat-button cdkFocusInitial color="warn">Apply Filtering</button>
+        </div>
+    </form>
+</mat-dialog-content>

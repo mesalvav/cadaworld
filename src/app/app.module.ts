@@ -22,14 +22,16 @@ import {MatTableModule} from '@angular/material/table';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PostresultsComponent } from './components/postresults/postresults.component';
 import { DatePipe } from '@angular/common';
-
+import {MatDialogModule} from '@angular/material';
+import { FilterdialogComponent } from './components/filterdialog/filterdialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PopularComponent,
     FilledformComponent,
-    PostresultsComponent
+    PostresultsComponent,
+    FilterdialogComponent
   ],
   imports: [
     BrowserModule,
@@ -46,9 +48,11 @@ import { DatePipe } from '@angular/common';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule
   ],
   providers: [DatePipe],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [FilterdialogComponent]
 })
 export class AppModule { }
