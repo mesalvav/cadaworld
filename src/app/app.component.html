@@ -1,9 +1,16 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-    <h4>
-        Welcome to {{ title }}!
-    </h4>
-    <!-- <small>Angular Material Version</small> -->
-</div>
+<mat-toolbar color="primary">
+    <div>
+        <a mat-button routerLink="/populars">
+            <i class="material-icons">home</i>
+        </a>
+    </div>
+    <div fxFlex fxLayout fxLayoutAlign="flex-end">
+        <ul fxLayout fxLayoutGap="10px" class="navigation-items">
+            <li><a mat-button routerLink="/populars">Back to Popular Routes </a></li>
+        </ul>
+    </div>
+</mat-toolbar>
+
+<!-- <small>Angular Material Version</small> -->
 
 <router-outlet></router-outlet>

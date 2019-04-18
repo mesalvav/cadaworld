@@ -1,5 +1,3 @@
-<a routerLink="/populars" class="nav-link" mat-raised-button color="accent">To populars routes</a>
-
 <section>
     <form fxLayout="column" fxLayoutAlign="center center" [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
         <p>
@@ -72,6 +70,6 @@
 
         </div>
         <br>
-        <button type="submit" mat-raised-button color="accent" [disabled]="this.reactiveForm.invalid">Search Flights</button>
+        <button type="submit" mat-raised-button color="primary" [disabled]="this.reactiveForm.invalid">Search Flights</button>
     </form>
 </section>

@@ -115,7 +115,7 @@ export class MessagingResultsPostService {
                retDate = 'TBD';
              } else {
                const tDate = resEle.departureDate;
-               retDate = this.datepipe.transform(tDate, 'dd-MMM-yy');
+               retDate = this.datepipe.transform(tDate, 'MMM d, y');
              }
                const tempFlatObject =
                          new FlattenPostResultObject(

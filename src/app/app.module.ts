@@ -24,6 +24,7 @@ import { PostresultsComponent } from './components/postresults/postresults.compo
 import { DatePipe } from '@angular/common';
 import {MatDialogModule} from '@angular/material';
 import { FilterdialogComponent } from './components/filterdialog/filterdialog.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { FilterdialogComponent } from './components/filterdialog/filterdialog.co
     MatNativeDateModule,
     MatSelectModule,
     MatTableModule,
-    MatDialogModule
+    MatDialogModule,
+    MatToolbarModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],

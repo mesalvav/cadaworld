@@ -1,7 +1,6 @@
-<a routerLink="/populars" class="nav-link" mat-raised-button color="accent">To populars routes</a>
 <div fxLayout="row" fxLayoutAlign="center" class="filterButton">
-    <button mat-raised-button color="warn" (click)="openFilterDialog()">Open Filter</button>
-    <button mat-raised-button color="warn" (click)="resetFilter()"> Reset Filter</button>
+    <button mat-raised-button color="primary" (click)="openFilterDialog()">Open Filter</button>
+    <button mat-raised-button color="primary" (click)="resetFilter()"> Reset Filter</button>
 </div>
 
 <div fxLayout="row" fxLayoutAlign="center center">
@@ -22,7 +21,7 @@
         </ng-container>
         <!-- priceUSD Column -->
         <ng-container matColumnDef="priceUSD">
-            <th mat-header-cell *matHeaderCellDef> Price($) </th>
+            <th mat-header-cell *matHeaderCellDef> Price ($) </th>
             <td mat-cell *matCellDef="let element"> {{element.priceUSD}} </td>
         </ng-container>
         <!-- departureDate Column -->
