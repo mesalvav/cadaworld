@@ -29,16 +29,29 @@ export class PostresultsComponent implements OnInit {
   ngOnInit() {
     // flatten mean for each route create a row (similar to DB denormalization)
     this.flatDataSource$$$
-      = this.messagingResultsPostService.getFilteredObservable();
+      = this.messagingResultsPostService.flatResults$$$;
 
   }
+
 
   openFilterDialog() {
 
     const dialogConfig = new MatDialogConfig();
 
-    this.dialog.open(FilterdialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(FilterdialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.flatDataSource$$$
+        = this.messagingResultsPostService.getFilteredObservable();
+    });
    }
+
+   resetFilter() {
+      this.flatDataSource$$$
+        = this.messagingResultsPostService.flatResults$$$;
+   }
+
+
 
 
 }

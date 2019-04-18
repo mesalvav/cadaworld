@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { PostResultObject, FlattenPostResultObject } from '../models/PostResults';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { DatePipe } from '@angular/common';
-import { map } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
+import { FilterDialogFormValues } from '../models/FilterDialog';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,8 @@ export class MessagingResultsPostService {
   private flatBubject = new BehaviorSubject<FlattenPostResultObject[]>([]);
   flatResults$$$: Observable<FlattenPostResultObject[]> = this.flatBubject.asObservable();
 
+  private filterDialogData: FilterDialogFormValues;
+
   constructor(private datepipe: DatePipe) {
     this.postResult = [];
    }
@@ -26,18 +29,65 @@ export class MessagingResultsPostService {
       this.resultsFlattener();
    }
 
+  sendFilterCriteriaToSourceOfTable( criteriaData:FilterDialogFormValues ) {
+      this.filterDialogData = criteriaData;
 
+  }
    clear() {
      this.postResult = [];
    }
 
    getFilteredObservable():  Observable<FlattenPostResultObject[]> {
+
       const filteredObservable$$$: Observable<FlattenPostResultObject[]>
       = this.flatResults$$$.pipe(
-        map(flatObjS => flatObjS
-                .filter( objX => this.toNumericalTime(objX.departureTime) > this.toNumericalTime('11:00') )
 
-      ) );
+
+         map(flatObjX => flatObjX
+          .filter( flobj => {
+            if (this.filterDialogData.priceMoreThan === null) { return true;}
+            else {
+                return flobj.priceUSD > this.filterDialogData.priceMoreThan;
+            }
+
+          })),
+
+         map(flatObjX => flatObjX
+          .filter( flobj => {
+            if (this.filterDialogData.priceLessThan === null) {return true;}
+            else {
+              return flobj.priceUSD < this.filterDialogData.priceLessThan;
+            }
+            })),
+
+          map(flatObjX => flatObjX
+            .filter(flobj => {
+                if (!this.filterDialogData.getNumericalTimeLessThan()) {
+                  console.log('filter data time: ' + this.filterDialogData.getNumericalTimeLessThan());
+                    return true;
+                } else {
+                  console.log('numerical time: ' + this.toNumericalTime(flobj.departureTime));
+                  const boolx = this.toNumericalTime(flobj.departureTime) < this.filterDialogData.getNumericalTimeLessThan();
+                  return boolx;
+                }
+
+             })),
+
+             map(flatObjX => flatObjX
+              .filter(flobj => {
+                  if (!this.filterDialogData.getNumericalTimeMoreThan()) {
+                    console.log('filter data time: ' + this.filterDialogData.getNumericalTimeMoreThan());
+                      return true;
+                  } else {
+                    console.log('numerical time: ' + this.toNumericalTime(flobj.departureTime));
+                    const boolx = this.toNumericalTime(flobj.departureTime) > this.filterDialogData.getNumericalTimeMoreThan();
+                    return boolx;
+                  }
+
+               }))
+
+
+        );
 
       return filteredObservable$$$;
    }

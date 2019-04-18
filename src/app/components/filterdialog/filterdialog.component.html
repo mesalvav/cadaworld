@@ -45,25 +45,26 @@
         <div fxLayout.gt-sm="row">
             <div fxLayout="column">
                 <h4>Price less than</h4>
-                <mat-form-field>
-                    <mat-label>$USD</mat-label>
-                    <mat-select>
-                        <mat-option>
-                            0
-                        </mat-option>
-                    </mat-select>
+                <mat-form-field class="example-full-width">
+                    <input type="number" matInput placeholder="$USD" formControlName="priceLessThanControl">
+
+                    <mat-error *ngIf="this.reactiveForm.get('priceMoreThanControl').hasError('min')">
+                        Only positive numbers
+                    </mat-error>
+
                 </mat-form-field>
             </div>
+
             <div style="display: inline; font-size: 2em">&nbsp; &nbsp; </div>
+
             <div fxLayout="column">
                 <h4>Price higher than</h4>
-                <mat-form-field>
-                    <mat-label>$USD</mat-label>
-                    <mat-select>
-                        <mat-option>
-                            1
-                        </mat-option>
-                    </mat-select>
+                <mat-form-field class="example-full-width">
+                    <input type="number" matInput placeholder="$USD" formControlName="priceMoreThanControl">
+
+                    <mat-error *ngIf="this.reactiveForm.get('priceLessThanControl').hasError('min')">
+                        Only positive numbers
+                    </mat-error>
                 </mat-form-field>
             </div>
         </div>
